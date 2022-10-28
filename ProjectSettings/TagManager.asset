@@ -14,7 +14,7 @@ TagManager:
   - Ground
   - Env
   - Player
-  - 
+  - Bomb
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1879611679
+    locked: 0
+  - name: Bomb
+    uniqueID: 2316055927
     locked: 0
