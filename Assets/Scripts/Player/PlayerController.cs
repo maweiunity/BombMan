@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
     public float Hp = 100;
     public float MoveSpeed = 10;
     public float Jump = 20;
+    public float BombAT = 1.5f;
+    public float LastBombAKTime;
+
+    [Header("Warp")]
+    public GameObject BombPrefab;
 
     [Header("状态")]
     public bool IsJump = false;
@@ -29,8 +34,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 初始化
         playerRb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
+        BombPrefab = Resources.Load<GameObject>("Prefabs/Player/Bomb");
 
         // GroundCheckPoint = transform.GetComponentInChildren<Transform>();
     }
@@ -86,12 +93,26 @@ public class PlayerController : MonoBehaviour
         IsJumpBntDown = false;
     }
 
-    // 是否按下跳跃键
+    // 炸弹攻击
+    void bombAttack()
+    {
+        if (Time.time > LastBombAKTime)
+        {
+            Instantiate<GameObject>(BombPrefab, transform.position, Quaternion.identity);
+            LastBombAKTime = Time.time + BombAT;
+        }
+    }
+
+    // 按键检测
     void checkButtonDown()
     {
         if (Input.GetButtonDown("Jump"))
         {
             IsJumpBntDown = true;
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            bombAttack();
         }
     }
 

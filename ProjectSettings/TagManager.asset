@@ -15,7 +15,7 @@ TagManager:
   - Env
   - Player
   - Bomb
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -44,9 +44,9 @@ TagManager:
   - name: Env
     uniqueID: 3973488715
     locked: 0
-  - name: Player
-    uniqueID: 1879611679
-    locked: 0
   - name: Bomb
     uniqueID: 2316055927
+    locked: 0
+  - name: Player
+    uniqueID: 1879611679
     locked: 0
