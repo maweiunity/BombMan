@@ -19,12 +19,12 @@ public class BombController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 初始化组件
         bombRb = GetComponent<Rigidbody2D>();
         bombAnim = GetComponent<Animator>();
         bombCollid = GetComponent<Collider2D>();
-
+        // 开始计时
         startTime = Time.time;
-
     }
 
     // Update is called once per frame

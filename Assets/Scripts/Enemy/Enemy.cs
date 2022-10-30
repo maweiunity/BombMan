@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -16,12 +17,16 @@ public class Enemy : MonoBehaviour
 
     [Header("State")]
     [SerializeField]
-    public int moveDir = -1;
+    public int moveDir = 1;
 
     [Header("Patrol")]
     [SerializeField]
     protected Vector2 patrolLeft, patrolRight, moveTargetPos;
-    protected float guardRadius = 2f;
+    protected float guardRadius = 5f;
+
+    [Header("Attack")]
+    [SerializeField]
+    protected List<Transform> attackList = new List<Transform>();
 
     private void Start()
     {
@@ -37,6 +42,8 @@ public class Enemy : MonoBehaviour
     {
         direction();
         moveToTarget();
+
+        setAnimation();
     }
 
     // 初始化巡逻范围
@@ -63,20 +70,30 @@ public class Enemy : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(moveTargetPos.x, transform.position.y), MoveSpeed * Time.deltaTime);
     }
 
+    // 动画
+    void setAnimation()
+    {
+        enemyAnim.SetFloat("Speed", enemyRb.velocity.x);
+    }
+
     // 移动方向检测
     void direction()
     {
-        if (moveDir == -1 && transform.position.x <= moveTargetPos.x)
+        float distance = Vector2.Distance(transform.position, moveTargetPos);
+        if (Mathf.Abs(distance) <= 0.2f)
         {
-            moveDir = 1;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            moveTargetPos = patrolRight;
-        }
-        else if (moveDir == 1 && transform.position.x >= moveTargetPos.x)
-        {
-            moveTargetPos = patrolLeft;
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            moveDir = -1;
+            if (moveDir == 1)
+            {
+                moveDir = -1;
+                moveTargetPos = patrolLeft;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                moveDir = 1;
+                moveTargetPos = patrolRight;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
         // 碰撞到墙了，
         Vector2 rayPos = new Vector2(transform.position.x, transform.position.y - 0.2f);
@@ -87,17 +104,25 @@ public class Enemy : MonoBehaviour
         // 如果碰到墙，换方向
         if (hit)
         {
-            Debug.Log("123123:" + hit.transform.position.x);
-            moveDir = -moveDir;
-            moveTargetPos = hit.transform.position;
-            if (moveDir == 1)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
+            moveTargetPos = transform.position;
+        }
+    }
+
+    // 进行范围
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (!attackList.Contains(other.transform))
+        {
+            attackList.Add(other.transform);
+        }
+    }
+
+    // 退出范围
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (attackList.Contains(other.transform))
+        {
+            attackList.Remove(other.transform);
         }
     }
 }

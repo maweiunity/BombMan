@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float Hp = 100;
     public float MoveSpeed = 10;
     public float Jump = 20;
-    public float BombAT = 1.5f;
+    public float BombAT = 1.4f;
     public float LastBombAKTime;
 
     [Header("Warp")]
@@ -44,20 +44,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // 是否在地面检测
-        checkIsGround();
         // 按键检测
         checkButtonDown();
-        // 玩家动画
-        playerAnimation();
-    }
-
-    private void FixedUpdate()
-    {
+        // 是否在地面检测
+        checkIsGround();
         // 玩家移动
         playerMove();
         // 玩家跳跃
         playerJump();
+        // 玩家动画
+        playerAnimation();
     }
 
     // 移动
@@ -65,7 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         float axis = Input.GetAxisRaw("Horizontal");
         // 移动
-        playerRb.velocity = new Vector2(MoveSpeed * axis, playerRb.velocity.y);
+        playerRb.velocity = new Vector2(Time.deltaTime * MoveSpeed * axis, playerRb.velocity.y);
         // 朝向
         if (axis != 0)
         {
@@ -88,7 +84,7 @@ public class PlayerController : MonoBehaviour
             // 跳跃重力
             playerRb.gravityScale = 3;
             // 跳跃速度
-            playerRb.velocity = new Vector2(playerRb.velocity.x, Jump);
+            playerRb.velocity = new Vector2(playerRb.velocity.x * Time.deltaTime, Jump);
         }
         IsJumpBntDown = false;
     }
@@ -96,23 +92,23 @@ public class PlayerController : MonoBehaviour
     // 炸弹攻击
     void bombAttack()
     {
-        if (Time.time > LastBombAKTime)
+        if (Time.time >= LastBombAKTime)
         {
-            Instantiate<GameObject>(BombPrefab, transform.position, Quaternion.identity);
             LastBombAKTime = Time.time + BombAT;
+            GameObject.Instantiate<GameObject>(BombPrefab, transform.position, Quaternion.identity);
         }
     }
 
     // 按键检测
     void checkButtonDown()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            IsJumpBntDown = true;
-        }
         if (Input.GetKeyDown(KeyCode.J))
         {
             bombAttack();
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+            IsJumpBntDown = true;
         }
     }
 
