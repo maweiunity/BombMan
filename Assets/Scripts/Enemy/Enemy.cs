@@ -21,14 +21,14 @@ public class Enemy : MonoBehaviour
     public EnemyBaseState CurrentState;
     public EnemyBaseState PatrolState = new PatrolState();
     public EnemyBaseState AttackState = new AttackState();
+    public bool IsChange = false;
 
     [Header("Patrol")]
     public Vector2 PatrolLeft, PatrolRight, MoveTargetPos;
     protected float guardRadius = 5f;
 
     [Header("Attack")]
-    [SerializeField]
-    protected List<Transform> attackList = new List<Transform>();
+    public List<Transform> AttackList = new List<Transform>();
 
     private void Start()
     {
@@ -38,13 +38,14 @@ public class Enemy : MonoBehaviour
 
         // 初始化巡逻范围
         initPatrolPoint();
-        CurrentState = PatrolState;
+        // 初始化运行模式
+        ChangeState(PatrolState);
     }
 
     private void Update()
     {
-        EnemyAnim.SetInteger("State", AnimState);
         CurrentState.OnUpdate(this);
+        EnemyAnim.SetInteger("State", AnimState);
     }
 
     // 初始化巡逻范围
@@ -87,7 +88,7 @@ public class Enemy : MonoBehaviour
         // 如果碰到墙，换方向
         if (hit)
         {
-            MoveTargetPos = transform.position;
+            MoveTargetPos = new Vector2(transform.position.x, transform.position.y);
         }
     }
 
@@ -104,33 +105,35 @@ public class Enemy : MonoBehaviour
     public void SetMoveTarget()
     {
         // 切换目标点
-        if (transform.position.x >= MoveTargetPos.x)
+        if (MoveDir == 1)
         {
             MoveDir = -1;
             MoveTargetPos = PatrolLeft;
+            AnimState = 0;
         }
-        else
+        else if (MoveDir == -1)
         {
             MoveDir = 1;
             MoveTargetPos = PatrolRight;
+            AnimState = 0;
         }
     }
 
     // 进行范围
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!attackList.Contains(other.transform))
+        if (!AttackList.Contains(other.transform))
         {
-            attackList.Add(other.transform);
+            AttackList.Add(other.transform);
         }
     }
 
     // 退出范围
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (attackList.Contains(other.transform))
+        if (AttackList.Contains(other.transform))
         {
-            attackList.Remove(other.transform);
+            AttackList.Remove(other.transform);
         }
     }
 
