@@ -14,7 +14,10 @@ public class Enemy : MonoBehaviour
     public float AK = 10;
     public float MoveSpeed = 500;
     public float AT = 1f;
-    public float AttackRadius = 0.5f;
+    public float AttackRate = 1f;
+    public float AttackRadius = 1f;
+    public float SkillAttackRadius = 1.2f;
+    protected float nextAttackTime;
 
     [Header("State")]
     public int moveDir = 1;
@@ -81,18 +84,24 @@ public class Enemy : MonoBehaviour
     // 普通攻击
     public void CommonAttack()
     {
-        if (Mathf.Abs(transform.position.x - MoveTargetPos.x) < AttackRadius)
+        if (Vector2.Distance(transform.position, MoveTargetPos) < AttackRadius && Time.time >= nextAttackTime)
         {
-            Debug.Log("攻击目标");
+            // 设置下次攻击时间
+            nextAttackTime = Time.time + AttackRate;
+            // 设置动画
+            EnemyAnim.SetTrigger("Attack");
         }
     }
 
     // 技能攻击
     public virtual void SkillAttack()
     {
-        if (Mathf.Abs(transform.position.x - MoveTargetPos.x) < AttackRadius)
+        if (Vector2.Distance(transform.position, MoveTargetPos) < SkillAttackRadius && Time.time >= nextAttackTime)
         {
-            Debug.Log("技能攻击目标");
+            // 设置下次攻击时间
+            nextAttackTime = Time.time + AttackRate;
+            // 设置动画
+            EnemyAnim.SetTrigger("Skill");
         }
     }
 
@@ -117,12 +126,12 @@ public class Enemy : MonoBehaviour
     {
         if (transform.position.x <= MoveTargetPos.x)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             moveDir = 1;
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             moveDir = -1;
         }
     }

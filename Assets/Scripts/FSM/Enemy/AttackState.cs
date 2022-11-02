@@ -4,6 +4,8 @@ public class AttackState : EnemyBaseState
 {
     public override void EnterState(Enemy enemy)
     {
+        Debug.Log("p wh ;");
+        enemy.AnimState = 2;
         enemy.MoveTargetPos = enemy.AttackList[0].position;
         enemy.AttackTarget = enemy.AttackList[0];
     }
