@@ -11,6 +11,7 @@ public class BombController : MonoBehaviour
     public float explotionRadius;
     public float CDTime;
     float startTime;
+    public bool State;
 
     [Header("Check")]
     public LayerMask explotionLM;
@@ -25,12 +26,13 @@ public class BombController : MonoBehaviour
         bombCollid = GetComponent<Collider2D>();
         // 开始计时
         startTime = Time.time;
+        State = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((Time.time - startTime) > CDTime)
+        if (State && (Time.time - startTime) > CDTime)
         {
             bombAnim.Play("Explotion");
         }
@@ -48,10 +50,40 @@ public class BombController : MonoBehaviour
         {
             foreach (var item in collObj)
             {
+                // 添加爆炸力
                 Vector3 dis = transform.position - item.transform.position;
                 item.GetComponent<Rigidbody2D>().AddForce((-dis + Vector3.up) * explotionPower, ForceMode2D.Impulse);
+
+                // 如果是关闭的炸弹，重新激活
+                if (item.CompareTag("Bomb") && item.GetComponent<BombController>().State == false)
+                {
+                    item.GetComponent<BombController>().TurnOn();
+                }
             }
         }
+    }
+
+    // 关闭炸弹
+    public void TurnOff()
+    {
+        // 更改状态
+        State = false;
+        // 播放熄灭动画
+        bombAnim.Play("Off");
+        // 修改layer层
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
+    }
+
+    public void TurnOn()
+    {
+        // 开启状态
+        State = true;
+        // 播放动画
+        bombAnim.Play("On");
+        // 修改layer层
+        gameObject.layer = LayerMask.NameToLayer("Bomb");
+        // 开始计时
+        startTime = Time.time;
     }
 
     // 销毁

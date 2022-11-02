@@ -459,7 +459,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 512284294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 311fe9fc90f7a4d45bec82edc2a7ab68, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fefeccd3f1870644b1221b33f8c3288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyRb: {fileID: 0}
@@ -469,7 +469,7 @@ MonoBehaviour:
   MoveSpeed: 2
   AT: 1
   AttackRate: 1
-  AttackRadius: 1.5
+  AttackRadius: 1
   SkillAttackRadius: 1.2
   moveDir: 1
   AnimState: 0
@@ -13016,7 +13016,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.032374144, y: 0.11875558}
+  m_Offset: {x: -0.058126688, y: 0.01970768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -13027,7 +13027,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.20519686, y: 0.11127424}
+  m_Size: {x: 0.7004361, y: 0.30937004}
   m_EdgeRadius: 0
 --- !u!1001 &1744013229
 PrefabInstance:

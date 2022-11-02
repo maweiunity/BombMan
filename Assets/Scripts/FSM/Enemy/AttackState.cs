@@ -4,7 +4,6 @@ public class AttackState : EnemyBaseState
 {
     public override void EnterState(Enemy enemy)
     {
-        Debug.Log("p wh ;");
         enemy.AnimState = 2;
         enemy.MoveTargetPos = enemy.AttackList[0].position;
         enemy.AttackTarget = enemy.AttackList[0];
@@ -21,23 +20,9 @@ public class AttackState : EnemyBaseState
         }
 
         // 攻击
-        attack(enemy);
-    }
-
-    // 攻击
-    void attack(Enemy enemy)
-    {
-
-        for (int i = 0; i < enemy.AttackList.Count; i++)
-        {
-            if (Mathf.Abs(enemy.transform.position.x - enemy.AttackList[i].position.x) < Mathf.Abs(enemy.transform.position.x - enemy.MoveTargetPos.x))
-            {
-                enemy.AttackTarget = enemy.AttackList[i];
-            }
-        }
+        attackTarget(enemy);
 
         // 更新目录坐标
-        enemy.AnimState = 1;
         enemy.MoveTargetPos = enemy.AttackTarget.position;
 
         // 攻击目标
@@ -53,5 +38,24 @@ public class AttackState : EnemyBaseState
 
         // 移动动目标点
         enemy.MoveToTarget();
+    }
+
+    // 攻击
+    void attackTarget(Enemy enemy)
+    {
+        if (enemy.AttackList.Count == 1)
+        {
+            enemy.AttackTarget = enemy.AttackList[0];
+        }
+        else if (enemy.AttackList.Count > 1)
+        {
+            for (int i = 0; i < enemy.AttackList.Count; i++)
+            {
+                if (Mathf.Abs(enemy.transform.position.x - enemy.AttackList[i].position.x) < Mathf.Abs(enemy.transform.position.x - enemy.MoveTargetPos.x))
+                {
+                    enemy.AttackTarget = enemy.AttackList[i];
+                }
+            }
+        }
     }
 }
