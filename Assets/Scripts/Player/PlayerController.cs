@@ -48,12 +48,16 @@ public class PlayerController : MonoBehaviour
         checkButtonDown();
         // 是否在地面检测
         checkIsGround();
+        // 玩家动画
+        playerAnimation();
+    }
+
+    private void FixedUpdate()
+    {
         // 玩家移动
         playerMove();
         // 玩家跳跃
         playerJump();
-        // 玩家动画
-        playerAnimation();
     }
 
     // 移动
@@ -61,7 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         float axis = Input.GetAxisRaw("Horizontal");
         // 移动
-        playerRb.velocity = new Vector2(Time.deltaTime * MoveSpeed * axis, playerRb.velocity.y);
+        playerRb.velocity = new Vector2(MoveSpeed * axis, playerRb.velocity.y);
         // 朝向
         if (axis != 0)
         {

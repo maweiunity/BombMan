@@ -440,12 +440,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512284294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.75, y: -4.94, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.04, y: -4.76, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1861278044}
   - {fileID: 1846468501}
+  - {fileID: 1861278044}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -461,15 +461,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311fe9fc90f7a4d45bec82edc2a7ab68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyRb: {fileID: 0}
+  EnemyAnim: {fileID: 0}
   HP: 100
   AK: 10
   MoveSpeed: 2
   AT: 1
+  AttackRadius: 0.5
   moveDir: 1
-  patrolLeft: {x: 0, y: 0}
-  patrolRight: {x: 0, y: 0}
-  moveTargetPos: {x: 0, y: 0}
-  attackList: []
+  AnimState: 0
+  IsChange: 0
+  PatrolLeft: {x: 0, y: 0}
+  PatrolRight: {x: 0, y: 0}
+  MoveTargetPos: {x: 0, y: 0}
+  AttackTarget: {fileID: 0}
+  AttackList: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -12900,6 +12906,10 @@ PrefabInstance:
       propertyPath: BombAT
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1362102211568152058, guid: a2f5eb8f053d6ee48a2f2c6b1bf72dcb, type: 3}
+      propertyPath: MoveSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2774240085151178873, guid: a2f5eb8f053d6ee48a2f2c6b1bf72dcb, type: 3}
       propertyPath: m_Name
       value: BombMan
@@ -12910,7 +12920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6956305645504933022, guid: a2f5eb8f053d6ee48a2f2c6b1bf72dcb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.41
       objectReference: {fileID: 0}
     - target: {fileID: 6956305645504933022, guid: a2f5eb8f053d6ee48a2f2c6b1bf72dcb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13041,7 +13051,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 512284299}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1861278043
 GameObject:
@@ -13073,7 +13083,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 512284299}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1861278045
 BoxCollider2D:
@@ -13554,11 +13564,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8606727658132569089, guid: 09009db221308de409d3eb722661fafc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.17
+      value: -10.39
       objectReference: {fileID: 0}
     - target: {fileID: 8606727658132569089, guid: 09009db221308de409d3eb722661fafc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.05
+      value: -4.81
       objectReference: {fileID: 0}
     - target: {fileID: 8606727658132569089, guid: 09009db221308de409d3eb722661fafc, type: 3}
       propertyPath: m_LocalPosition.z

@@ -14,9 +14,10 @@ public class Enemy : MonoBehaviour
     public float AK = 10;
     public float MoveSpeed = 500;
     public float AT = 1f;
+    public float AttackRadius = 0.5f;
 
     [Header("State")]
-    public int MoveDir = 1;
+    public int moveDir = 1;
     public int AnimState = 0;
     public EnemyBaseState CurrentState;
     public EnemyBaseState PatrolState = new PatrolState();
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
     protected float guardRadius = 5f;
 
     [Header("Attack")]
+    public Transform AttackTarget;
     public List<Transform> AttackList = new List<Transform>();
 
     private void Start()
@@ -76,46 +78,66 @@ public class Enemy : MonoBehaviour
         faceDirection();
     }
 
+    // 普通攻击
+    public void CommonAttack()
+    {
+        if (Mathf.Abs(transform.position.x - MoveTargetPos.x) < AttackRadius)
+        {
+            Debug.Log("攻击目标");
+        }
+    }
+
+    // 技能攻击
+    public virtual void SkillAttack()
+    {
+        if (Mathf.Abs(transform.position.x - MoveTargetPos.x) < AttackRadius)
+        {
+            Debug.Log("技能攻击目标");
+        }
+    }
+
     // 移动障碍检测
     void moveToBarrier()
     {
         // 碰撞到墙了，
         Vector2 rayPos = new Vector2(transform.position.x, transform.position.y - 0.2f);
         // 发射检测射线
-        RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.right * MoveDir, 0.5f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.right * moveDir, 0.4f, LayerMask.GetMask("Ground"));
         // 画射线，用于调试
-        Debug.DrawRay(rayPos, Vector2.right * MoveDir, Color.green);
+        Debug.DrawRay(rayPos, Vector2.right * moveDir, Color.green);
         // 如果碰到墙，换方向
         if (hit)
         {
-            MoveTargetPos = new Vector2(transform.position.x, transform.position.y);
+            MoveTargetPos = new Vector2(transform.position.x + (moveDir * 0.1f), transform.position.y);
         }
     }
 
     // 人物面朝方向
     void faceDirection()
     {
-        if (MoveDir == 1)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        else
+        if (transform.position.x <= MoveTargetPos.x)
+        {
             transform.rotation = Quaternion.Euler(0, 180, 0);
+            moveDir = 1;
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            moveDir = -1;
+        }
     }
 
     // 设置移动目标点
     public void SetMoveTarget()
     {
         // 切换目标点
-        if (MoveDir == 1)
+        if (Mathf.Abs(transform.position.x - PatrolLeft.x) - Mathf.Abs(transform.position.x - PatrolRight.x) > 0)
         {
-            MoveDir = -1;
             MoveTargetPos = PatrolLeft;
-            AnimState = 0;
         }
-        else if (MoveDir == -1)
+        else
         {
-            MoveDir = 1;
             MoveTargetPos = PatrolRight;
-            AnimState = 0;
         }
     }
 
@@ -140,9 +162,9 @@ public class Enemy : MonoBehaviour
     // void Patrol()
     // {
     //     // 移动
-    //     enemyRb.velocity = new Vector2(MoveDir * MoveSpeed, transform.position.y);
+    //     enemyRb.velocity = new Vector2(moveDir * MoveSpeed, transform.position.y);
     //     // 朝向
-    //     transform.localScale = new Vector3(-MoveDir, 1, 1);
+    //     transform.localScale = new Vector3(-moveDir, 1, 1);
     //     // 动画
     //     enemyAnim.SetFloat("Speed", Mathf.Abs(enemyRb.velocity.x));
     // }
