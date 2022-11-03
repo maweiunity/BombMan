@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IHurt
 {
     // 刚体对象
     Rigidbody2D playerRb;
@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float Hp = 100;
     public float MoveSpeed = 10;
     public float Jump = 20;
+    public float Attack = 10;
     public float BombAT = 1.4f;
     public float LastBombAKTime;
 
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public bool IsCanJump = true;
     public bool IsJumpBntDown = false;
     public bool IsGround = false;
+    public bool IsDead = false;
 
     [Header("检测配置")]
     public Transform GroundCheckPoint;
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (IsDead) return;
         // 按键检测
         checkButtonDown();
         // 是否在地面检测
@@ -54,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (IsDead) return;
         // 玩家移动
         playerMove();
         // 玩家跳跃
@@ -99,7 +103,8 @@ public class PlayerController : MonoBehaviour
         if (Time.time >= LastBombAKTime)
         {
             LastBombAKTime = Time.time + BombAT;
-            GameObject.Instantiate<GameObject>(BombPrefab, transform.position, Quaternion.identity);
+            BombController bomb = GameObject.Instantiate<GameObject>(BombPrefab, transform.position, Quaternion.identity).GetComponent<BombController>();
+            bomb.Attack = Attack;
         }
     }
 
@@ -152,5 +157,20 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(GroundCheckPoint.position, GroundCheckRadius);
+    }
+
+    // 受伤处理
+    public void HitHurt(float hurtVal)
+    {
+        // 播放动画
+        playerAnim.SetTrigger("Hurt");
+        // 减生命值
+        Hp -= hurtVal;
+        if (Hp < 1)
+        {
+            Hp = 0;
+            playerAnim.SetBool("Dead", true);
+            IsDead = true;
+        }
     }
 }

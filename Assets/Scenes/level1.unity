@@ -157,7 +157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &481423996
 Animator:
   serializedVersion: 4
@@ -308,11 +308,11 @@ GameObject:
   - component: {fileID: 512284300}
   m_Layer: 10
   m_Name: Cucumber
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &512284295
 Animator:
   serializedVersion: 4
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyRb: {fileID: 0}
   EnemyAnim: {fileID: 0}
-  HP: 100
+  Hp: 100
   AK: 10
   MoveSpeed: 2
   AT: 1
@@ -474,6 +474,7 @@ MonoBehaviour:
   moveDir: 1
   AnimState: 0
   IsChange: 0
+  IsDead: 0
   PatrolLeft: {x: 0, y: 0}
   PatrolRight: {x: 0, y: 0}
   MoveTargetPos: {x: 0, y: 0}
@@ -12905,6 +12906,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1362102211568152058, guid: a2f5eb8f053d6ee48a2f2c6b1bf72dcb, type: 3}
+      propertyPath: Attack
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2774240085151178873, guid: a2f5eb8f053d6ee48a2f2c6b1bf72dcb, type: 3}
       propertyPath: m_Name
       value: BombMan

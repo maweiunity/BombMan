@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     // protected Collider2D checkArea;
 
     [Header("Common Attribute")]
-    public float HP = 100;
+    public float Hp = 100;
     public float AK = 10;
     public float MoveSpeed = 500;
     public float AT = 1f;
@@ -22,10 +22,13 @@ public class Enemy : MonoBehaviour
     [Header("State")]
     public int moveDir = 1;
     public int AnimState = 0;
+    public bool IsChange = false;
+    public bool IsDead = false;
+
+    [Header("Animation Mode")]
     public EnemyBaseState CurrentState;
     public EnemyBaseState PatrolState = new PatrolState();
     public EnemyBaseState AttackState = new AttackState();
-    public bool IsChange = false;
 
     [Header("Patrol")]
     public Vector2 PatrolLeft, PatrolRight, MoveTargetPos;
@@ -49,6 +52,8 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (IsDead) return;
+
         CurrentState.OnUpdate(this);
         EnemyAnim.SetInteger("State", AnimState);
     }

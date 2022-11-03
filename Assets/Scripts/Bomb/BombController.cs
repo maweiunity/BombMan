@@ -12,6 +12,7 @@ public class BombController : MonoBehaviour
     public float CDTime;
     float startTime;
     public bool State;
+    public float Attack;
 
     [Header("Check")]
     public LayerMask explotionLM;
@@ -58,6 +59,11 @@ public class BombController : MonoBehaviour
                 if (item.CompareTag("Bomb") && item.GetComponent<BombController>().State == false)
                 {
                     item.GetComponent<BombController>().TurnOn();
+                }
+                else if (item.CompareTag("Player") || item.CompareTag("Enemy"))
+                {
+                    // 爆炸攻击
+                    item.GetComponent<IHurt>().HitHurt(Attack);
                 }
             }
         }
