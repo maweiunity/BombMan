@@ -63,7 +63,7 @@ public class BombController : MonoBehaviour
                 else if (item.CompareTag("Player") || item.CompareTag("Enemy"))
                 {
                     // 爆炸攻击
-                    item.GetComponent<IHurt>().HitHurt(Attack);
+                    item.GetComponent<IHurt>()?.HitHurt(Attack);
                 }
             }
         }

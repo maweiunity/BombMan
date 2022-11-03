@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BaldPirate : MonoBehaviour
+public class BaldPirate : Enemy
 {
-    // Start is called before the first frame update
-    void Start()
+    // 受伤
+    public void HitHurt(float hurtVal)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // 播放动画
+        EnemyAnim.SetTrigger("Hurt");
+        // 减生命值
+        Hp -= hurtVal;
+        if (Hp < 1)
+        {
+            Hp = 0;
+            EnemyAnim.SetBool("Dead", true);
+            IsDead = true;
+        }
     }
 }

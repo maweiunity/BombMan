@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     [Header("Common Attribute")]
     public float Hp = 100;
     public float AK = 10;
-    public float MoveSpeed = 500;
+    public float MoveSpeed = 2;
     public float AT = 1f;
     public float AttackRate = 1f;
     public float AttackRadius = 1f;
@@ -171,6 +171,12 @@ public class Enemy : MonoBehaviour
         {
             AttackList.Remove(other.transform);
         }
+    }
+
+    [System.Obsolete]
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        transform.FindChild("Alert").gameObject.SetActive(true);
     }
 
     // void Patrol()
