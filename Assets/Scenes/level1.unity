@@ -151,13 +151,14 @@ GameObject:
   - component: {fileID: 481423998}
   - component: {fileID: 481423997}
   - component: {fileID: 481423996}
+  - component: {fileID: 481424001}
   m_Layer: 10
   m_Name: Whale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &481423996
 Animator:
   serializedVersion: 4
@@ -292,6 +293,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &481424001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481423995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a604ea3283d694da36229d3dd12ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &512284294
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &512284295
 Animator:
   serializedVersion: 4
@@ -6900,6 +6913,7 @@ GameObject:
   - component: {fileID: 1146628703}
   - component: {fileID: 1146628702}
   - component: {fileID: 1146628701}
+  - component: {fileID: 1146628706}
   m_Layer: 10
   m_Name: Bald Pirate
   m_TagString: Untagged
@@ -7041,6 +7055,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1146628706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146628700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8512a4a473d0faa438db6f07b2e354df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1260753001
 GameObject:
   m_ObjectHideFlags: 0
@@ -7054,6 +7080,7 @@ GameObject:
   - component: {fileID: 1260753004}
   - component: {fileID: 1260753003}
   - component: {fileID: 1260753002}
+  - component: {fileID: 1260753007}
   m_Layer: 10
   m_Name: Big Guy
   m_TagString: Untagged
@@ -7195,6 +7222,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1260753007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260753001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c05f5134955f70448dd0cae4aeccbaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1391770991
 GameObject:
   m_ObjectHideFlags: 0
@@ -7208,6 +7247,7 @@ GameObject:
   - component: {fileID: 1391770994}
   - component: {fileID: 1391770993}
   - component: {fileID: 1391770992}
+  - component: {fileID: 1391770997}
   m_Layer: 10
   m_Name: Captain
   m_TagString: Untagged
@@ -7349,6 +7389,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1391770997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391770991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 339fa56c4d1592e4791cd8c32d472cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1442553537
 GameObject:
   m_ObjectHideFlags: 0
@@ -12986,6 +13038,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1692809852}
   - component: {fileID: 1692809853}
+  - component: {fileID: 1692809854}
   m_Layer: 12
   m_Name: Attack
   m_TagString: Untagged
@@ -13034,6 +13087,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7004361, y: 0.30937004}
   m_EdgeRadius: 0
+--- !u!114 &1692809854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692809851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1326cf2ccbed7e54786272902f1e7fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1744013229
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -164,13 +164,16 @@ public class PlayerController : MonoBehaviour, IHurt
     {
         // 播放动画
         playerAnim.SetTrigger("Hurt");
-        // 减生命值
-        Hp -= hurtVal;
-        if (Hp < 1)
+        if (!playerAnim.GetCurrentAnimatorStateInfo(1).IsName("Hurt"))
         {
-            Hp = 0;
-            playerAnim.SetBool("Dead", true);
-            IsDead = true;
+            // 减生命值
+            Hp -= hurtVal;
+            if (Hp < 1)
+            {
+                Hp = 0;
+                playerAnim.SetBool("Dead", true);
+                IsDead = true;
+            }
         }
     }
 }

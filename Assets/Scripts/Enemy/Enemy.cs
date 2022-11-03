@@ -71,7 +71,6 @@ public class Enemy : MonoBehaviour
     // 状态切换
     public void ChangeState(EnemyBaseState state)
     {
-        Debug.Log("change:" + state.ToString());
         CurrentState = state;
         state.EnterState(this);
     }
