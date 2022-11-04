@@ -167,7 +167,7 @@ public class Enemy : MonoBehaviour
     // 进行范围
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!AttackList.Contains(other.transform) && !HasBomb)
+        if (!AttackList.Contains(other.transform) && !HasBomb && !IsDead && !GameManager.Instance.IsGameOver)
         {
             AttackList.Add(other.transform);
         }
@@ -185,7 +185,8 @@ public class Enemy : MonoBehaviour
     [System.Obsolete]
     private void OnTriggerEnter2D(Collider2D other)
     {
-        transform.FindChild("Alert").gameObject.SetActive(true);
+        if (!GameManager.Instance.IsGameOver)
+            transform.FindChild("Alert").gameObject.SetActive(true);
     }
 
 }
