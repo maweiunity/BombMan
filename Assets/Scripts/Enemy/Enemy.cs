@@ -47,6 +47,9 @@ public class Enemy : MonoBehaviour
         EnemyAnim = GetComponent<Animator>();
         // checkArea = GetComponentInChildren<Collider2D>();
 
+        // 添加列表
+        GameManager.Instance.AddEnemy(this);
+
         // 初始化巡逻范围
         initPatrolPoint();
         // 初始化运行模式
@@ -119,19 +122,36 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // 受伤
+    public virtual void HitHurt(float hurtVal)
+    {
+        // 播放动画
+        EnemyAnim.SetTrigger("Hurt");
+        // 减生命值
+        Hp -= hurtVal;
+        if (Hp < 1)
+        {
+            Hp = 0;
+            EnemyAnim.SetBool("Dead", true);
+            IsDead = true;
+            // 删除
+            GameManager.Instance.RemoveEnemy(this);
+        }
+    }
+
     // 移动障碍检测
     void moveToBarrier()
     {
         // 碰撞到墙了，
         Vector2 rayPos = new Vector2(transform.position.x, transform.position.y - 0.2f);
         // 发射检测射线
-        RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.right * moveDir, 0.4f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.right * moveDir, 0.6f, LayerMask.GetMask("Ground"));
         // 画射线，用于调试
         Debug.DrawRay(rayPos, Vector2.right * moveDir, Color.green);
         // 如果碰到墙，换方向
         if (hit)
         {
-            MoveTargetPos = new Vector2(transform.position.x + (moveDir * 0.1f), transform.position.y);
+            MoveTargetPos = new Vector2(transform.position.x + (moveDir * 0.2f), transform.position.y);
         }
     }
 

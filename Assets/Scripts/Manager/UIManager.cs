@@ -5,7 +5,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    [Header("UI Bar")]
+    [Header("UI Panel")]
     public GameObject HpPanel;
     public Slider BossMaxHP;
     public GameObject PausePanel;
@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour
         {
             Instance = this;
         }
-
     }
 
     // 显示血条

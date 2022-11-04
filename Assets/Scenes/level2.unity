@@ -7689,7 +7689,7 @@ GameObject:
   - component: {fileID: 1321688328}
   - component: {fileID: 1321688332}
   - component: {fileID: 1321688331}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15116,6 +15116,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whale
       objectReference: {fileID: 0}
+    - target: {fileID: 993652986298797053, guid: 4abe93601afe4d54189dce109b8bb025, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4abe93601afe4d54189dce109b8bb025, type: 3}
 --- !u!1001 &1259695792351426365
@@ -15345,17 +15349,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3468902569597533545, guid: 855771eaa589b5c4e97840bc44829ea6, type: 3}
-      propertyPath: SkillAttackRadius
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3468902569597533551, guid: 855771eaa589b5c4e97840bc44829ea6, type: 3}
       propertyPath: m_Name
       value: Big Guy
       objectReference: {fileID: 0}
     - target: {fileID: 3468902569597533551, guid: 855771eaa589b5c4e97840bc44829ea6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 855771eaa589b5c4e97840bc44829ea6, type: 3}
