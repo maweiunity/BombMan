@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     public float SkillAttackPower = 10;
     public float SkillAttackRadius = 1.2f;
     protected float nextAttackTime;
+    public bool IsBoss;
 
     [Header("State")]
     public int moveDir = 1;
@@ -50,6 +51,8 @@ public class Enemy : MonoBehaviour
         initPatrolPoint();
         // 初始化运行模式
         ChangeState(PatrolState);
+        // 初始化boss血量
+        if (IsBoss) UIManager.Instance.InitBossHealthBar(Hp);
     }
 
     private void Update()
@@ -58,6 +61,9 @@ public class Enemy : MonoBehaviour
 
         CurrentState.OnUpdate(this);
         EnemyAnim.SetInteger("State", AnimState);
+
+        // 显示血量
+        if (IsBoss) UIManager.Instance.UpdateBossHp(Hp);
     }
 
     // 初始化巡逻范围

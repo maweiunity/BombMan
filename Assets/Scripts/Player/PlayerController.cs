@@ -174,6 +174,7 @@ public class PlayerController : MonoBehaviour, IHurt
                 playerAnim.SetBool("Dead", true);
                 IsDead = true;
             }
+            UIManager.Instance.ShowHealth(Hp);
         }
     }
 }

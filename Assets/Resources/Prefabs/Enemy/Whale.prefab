@@ -310,6 +310,7 @@ MonoBehaviour:
   AttackRadius: 1
   SkillAttackPower: 10
   SkillAttackRadius: 1.2
+  IsBoss: 1
   moveDir: 1
   AnimState: 0
   IsChange: 0

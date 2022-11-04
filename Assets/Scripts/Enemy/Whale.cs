@@ -1,5 +1,7 @@
 public class Whale : Enemy, IHurt
 {
+    float scale = 1.1f;
+
     // 受伤
     public void HitHurt(float hurtVal)
     {
@@ -12,6 +14,16 @@ public class Whale : Enemy, IHurt
             Hp = 0;
             EnemyAnim.SetBool("Dead", true);
             IsDead = true;
+        }
+    }
+
+    public void EatBomb()
+    {
+        if (AttackTarget && AttackTarget.CompareTag("Bomb"))
+        {
+            AttackTarget.gameObject?.SetActive(false);
+            AttackTarget.transform.SetParent(transform);
+            transform.localScale *= scale;
         }
     }
 }
