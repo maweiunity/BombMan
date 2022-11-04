@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public float AT = 1f;
     public float AttackRate = 1f;
     public float AttackRadius = 1f;
+    public float SkillAttackPower = 10;
     public float SkillAttackRadius = 1.2f;
     protected float nextAttackTime;
 
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
     public int AnimState = 0;
     public bool IsChange = false;
     public bool IsDead = false;
+    public bool HasBomb = false;
 
     [Header("Animation Mode")]
     public EnemyBaseState CurrentState;
@@ -78,6 +80,7 @@ public class Enemy : MonoBehaviour
     // 移动到目标
     public void MoveToTarget()
     {
+        if (HasBomb) return;
         // 障碍检测
         moveToBarrier();
         // 移动
@@ -158,7 +161,7 @@ public class Enemy : MonoBehaviour
     // 进行范围
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!AttackList.Contains(other.transform))
+        if (!AttackList.Contains(other.transform) && !HasBomb)
         {
             AttackList.Add(other.transform);
         }
@@ -179,20 +182,4 @@ public class Enemy : MonoBehaviour
         transform.FindChild("Alert").gameObject.SetActive(true);
     }
 
-    // void Patrol()
-    // {
-    //     // 移动
-    //     enemyRb.velocity = new Vector2(moveDir * MoveSpeed, transform.position.y);
-    //     // 朝向
-    //     transform.localScale = new Vector3(-moveDir, 1, 1);
-    //     // 动画
-    //     enemyAnim.SetFloat("Speed", Mathf.Abs(enemyRb.velocity.x));
-    // }
-
-
-    // 动画
-    // void setAnimation()
-    // {
-    //     enemyAnim.SetFloat("Speed", enemyRb.velocity.x);
-    // }
 }

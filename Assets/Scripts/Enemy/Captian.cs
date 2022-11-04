@@ -1,4 +1,4 @@
-public class Captian : Enemy
+public class Captian : Enemy, IHurt
 {
     // 受伤
     public void HitHurt(float hurtVal)

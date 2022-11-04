@@ -11,6 +11,7 @@ public class AttackState : EnemyBaseState
 
     public override void OnUpdate(Enemy enemy)
     {
+        if (enemy.HasBomb) return;
         // 如果范围内没有敌人了,切换为巡逻模式
         if (enemy.AttackList.Count < 1)
         {
