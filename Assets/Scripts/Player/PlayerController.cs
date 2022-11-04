@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour, IHurt
         playerAnim = GetComponent<Animator>();
         BombPrefab = Resources.Load<GameObject>("Prefabs/Player/Bomb");
 
+        Hp = GameManager.Instance.GetData();
+        UIManager.Instance.ShowHealth(Hp);
         // GroundCheckPoint = transform.GetComponentInChildren<Transform>();
     }
 

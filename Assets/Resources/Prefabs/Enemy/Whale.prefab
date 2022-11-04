@@ -302,7 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyRb: {fileID: 0}
   EnemyAnim: {fileID: 0}
-  Hp: 100
+  Hp: 10
   AK: 10
   MoveSpeed: 2
   AT: 1
@@ -311,6 +311,7 @@ MonoBehaviour:
   SkillAttackPower: 10
   SkillAttackRadius: 1.2
   IsBoss: 1
+  ObstacleCheckDir: 1.5
   moveDir: 1
   AnimState: 0
   IsChange: 0

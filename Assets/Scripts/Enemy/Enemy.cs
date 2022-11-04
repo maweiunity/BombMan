@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     public float SkillAttackRadius = 1.2f;
     protected float nextAttackTime;
     public bool IsBoss;
+    public float ObstacleCheckDir = 0.4f;
 
     [Header("State")]
     public int moveDir = 1;
@@ -145,7 +146,7 @@ public class Enemy : MonoBehaviour
         // 碰撞到墙了，
         Vector2 rayPos = new Vector2(transform.position.x, transform.position.y - 0.2f);
         // 发射检测射线
-        RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.right * moveDir, 0.6f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.right * moveDir, ObstacleCheckDir, LayerMask.GetMask("Ground"));
         // 画射线，用于调试
         Debug.DrawRay(rayPos, Vector2.right * moveDir, Color.green);
         // 如果碰到墙，换方向

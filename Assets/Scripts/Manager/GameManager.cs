@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     public bool IsGameOver;
 
+    string playerHpKey = "PlayerHp";
+
     // 敌人列表
     public List<Enemy> enemyList = new List<Enemy>();
 
@@ -49,12 +51,37 @@ public class GameManager : MonoBehaviour
     // 重启当前关
     public void AgainGame()
     {
+        PlayerPrefs.DeleteKey(playerHpKey);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // 进行下一关
     public void EnterNextLevel()
     {
+        SaveData();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    // 退出游戏
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    // 保存数据
+    public void SaveData()
+    {
+        PlayerPrefs.SetFloat(playerHpKey, PlayerCtl.Hp);
+        PlayerPrefs.Save();
+    }
+
+    // 获取存取数据
+    public float GetData()
+    {
+        if (!PlayerPrefs.HasKey(playerHpKey))
+        {
+            PlayerPrefs.SetFloat(playerHpKey, PlayerCtl.Hp);
+        }
+        return PlayerPrefs.GetFloat(playerHpKey);
     }
 }
