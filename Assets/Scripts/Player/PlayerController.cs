@@ -36,14 +36,17 @@ public class PlayerController : MonoBehaviour, IHurt
     // Start is called before the first frame update
     void Start()
     {
+        // 注册
+        GameManager.Instance.RegisterPlayer(this);
+
         // 初始化
         playerRb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
         BombPrefab = Resources.Load<GameObject>("Prefabs/Player/Bomb");
 
+        // 初始化血量,并显示
         Hp = GameManager.Instance.GetData();
         UIManager.Instance.ShowHealth(Hp);
-        // GroundCheckPoint = transform.GetComponentInChildren<Transform>();
     }
 
     private void Update()

@@ -20,7 +20,8 @@ public class Enemy : MonoBehaviour
     public float SkillAttackRadius = 1.2f;
     protected float nextAttackTime;
     public bool IsBoss;
-    public float ObstacleCheckDir = 0.4f;
+    public float ObstacleCheckDir = 0.8f;
+    public float TurnDistance = 0.5f;
 
     [Header("State")]
     public int moveDir = 1;
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
     public bool IsChange = false;
     public bool IsDead = false;
     public bool HasBomb = false;
+    public bool IsObstacle = false;
 
     [Header("Animation Mode")]
     public EnemyBaseState CurrentState;
@@ -36,7 +38,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Patrol")]
     public Vector2 PatrolLeft, PatrolRight, MoveTargetPos;
-    protected float guardRadius = 5f;
+    public float guardRadius = 5f;
 
     [Header("Attack")]
     public Transform AttackTarget;
@@ -148,11 +150,12 @@ public class Enemy : MonoBehaviour
         // 发射检测射线
         RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.right * moveDir, ObstacleCheckDir, LayerMask.GetMask("Ground"));
         // 画射线，用于调试
-        Debug.DrawRay(rayPos, Vector2.right * moveDir, Color.green);
+        Debug.DrawRay(rayPos, Vector2.right * moveDir * ObstacleCheckDir, Color.green);
         // 如果碰到墙，换方向
+        IsObstacle = hit;
         if (hit)
         {
-            MoveTargetPos = new Vector2(transform.position.x + (moveDir * 0.2f), transform.position.y);
+            MoveTargetPos = new Vector2(transform.position.x * moveDir * 0.2f, transform.position.y);
         }
     }
 

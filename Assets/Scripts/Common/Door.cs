@@ -10,6 +10,9 @@ public class Door : MonoBehaviour
     {
         doorAnim = GetComponent<Animator>();
         doorColl = GetComponent<Collider2D>();
+
+        // 注册
+        GameManager.Instance.RegisterDoor(this);
     }
 
     // 打开下一关的门

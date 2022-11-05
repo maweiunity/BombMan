@@ -311,15 +311,18 @@ MonoBehaviour:
   SkillAttackPower: 10
   SkillAttackRadius: 1.2
   IsBoss: 1
-  ObstacleCheckDir: 1.5
+  ObstacleCheckDir: 1.3
+  TurnDistance: 1.1
   moveDir: 1
   AnimState: 0
   IsChange: 0
   IsDead: 0
   HasBomb: 0
+  IsObstacle: 0
   PatrolLeft: {x: 0, y: 0}
   PatrolRight: {x: 0, y: 0}
   MoveTargetPos: {x: 0, y: 0}
+  guardRadius: 10
   AttackTarget: {fileID: 0}
   AttackList: []
 --- !u!1 &993652986532890844

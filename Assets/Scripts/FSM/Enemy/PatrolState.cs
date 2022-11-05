@@ -19,7 +19,7 @@ public class PatrolState : EnemyBaseState
         }
 
         // 是否已到巡逻点了
-        if (Mathf.Abs(enemy.transform.position.x - enemy.MoveTargetPos.x) < 0.2f)
+        if (Mathf.Abs(enemy.transform.position.x - enemy.MoveTargetPos.x) < enemy.TurnDistance)
         {
             // 设置移动目标点
             enemy.ChangeState(enemy.PatrolState);

@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject HpPanel;
     public Slider BossMaxHP;
     public GameObject PausePanel;
+    public GameObject MainPanel;
     public GameObject GameOverPanel;
 
     private void Awake()
@@ -77,5 +78,11 @@ public class UIManager : MonoBehaviour
     public void ShowGameOverUI(bool isActive)
     {
         GameOverPanel.SetActive(isActive);
+    }
+
+    // 主菜单
+    public void StartGame(bool isActive)
+    {
+        MainPanel.SetActive(isActive);
     }
 }
