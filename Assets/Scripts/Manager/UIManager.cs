@@ -48,19 +48,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // 暂停游戏
-    public void PauseGame()
-    {
-        Time.timeScale = 0;
-        PausePanel.SetActive(true);
-    }
 
-    // 继续游戏
-    public void ResumeGame()
-    {
-        PausePanel.SetActive(false);
-        Time.timeScale = 1;
-    }
 
     // 初始化boss血条
     public void InitBossHealthBar(float health)
@@ -74,15 +62,4 @@ public class UIManager : MonoBehaviour
         BossMaxHP.value = health;
     }
 
-    // 游戏结束ui
-    public void ShowGameOverUI(bool isActive)
-    {
-        GameOverPanel.SetActive(isActive);
-    }
-
-    // 主菜单
-    public void StartGame(bool isActive)
-    {
-        MainPanel.SetActive(isActive);
-    }
 }

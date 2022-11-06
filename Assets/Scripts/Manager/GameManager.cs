@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     public bool IsGameOver;
 
-    string playerHpKey = "PlayerHp";
-
     // 敌人列表
     public List<Enemy> enemyList = new List<Enemy>();
 
@@ -28,10 +26,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         IsGameOver = playerCtl.IsDead;
-        if (IsGameOver)
-        {
-            UIManager.Instance.ShowGameOverUI(true);
-        }
     }
 
     // 添加敌人到列表
@@ -50,13 +44,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // 重启当前关
-    public void AgainGame()
-    {
-        PlayerPrefs.DeleteKey(playerHpKey);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
     // 进行下一关
     public void EnterNextLevel()
     {
@@ -68,46 +55,29 @@ public class GameManager : MonoBehaviour
     public void ContiuneGame()
     {
         SceneManager.LoadScene(PlayerPrefs.GetInt("Level"));
-        SceneManager.LoadScene(PlayerPrefs.GetInt(playerHpKey));
-    }
-
-    // 退出游戏
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    // 重新开始新游戏
-    public void RestartGame()
-    {
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(1);
-    }
-
-    // 开始菜单
-    public void StartMenu()
-    {
-        SaveData(SceneManager.GetActiveScene().buildIndex);
-        SceneManager.LoadScene(0);
+        playerCtl.Hp = PlayerPrefs.GetInt("PlayerHp");
     }
 
     // 保存数据
     public void SaveData(int level)
     {
-        PlayerPrefs.SetFloat(playerHpKey, playerCtl.Hp);
-        PlayerPrefs.SetFloat("Level", level);
-        PlayerPrefs.Save();
+        if (playerCtl)
+        {
+            PlayerPrefs.SetFloat("PlayerHp", playerCtl.Hp);
+            PlayerPrefs.SetFloat("Level", level);
+            PlayerPrefs.Save();
+        }
     }
 
     // 获取存取数据
     public float GetData()
     {
-        if (!PlayerPrefs.HasKey(playerHpKey))
+        if (!PlayerPrefs.HasKey("PlayerHp"))
         {
-            PlayerPrefs.SetFloat(playerHpKey, 30);
+            PlayerPrefs.SetFloat("PlayerHp", 30);
             PlayerPrefs.SetInt("Level", 1);
         }
-        return PlayerPrefs.GetFloat(playerHpKey);
+        return PlayerPrefs.GetFloat("PlayerHp");
     }
 
     // 注册下一关的门
